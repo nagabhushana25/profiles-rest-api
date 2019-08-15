@@ -22,9 +22,9 @@ class UserProfileManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email, name, passoword):
+    def create_superuser(self, email, name, password):
         """Create and save super user profile with give deails"""
-        user = create_user(email, name, passoword)
+        user = self.create_user(email, name, password)
 
         user.is_superuser = True
         user.is_staff = True
@@ -55,6 +55,5 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
         """Retrieve short name of user"""
         return self.name
 
-    def __str__(self, arg):
-        super(UserProfile, self).__init__()
-        self.arg = arg
+    def __str__(self):
+        return self.email
